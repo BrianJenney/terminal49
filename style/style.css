@@ -6,3 +6,16 @@
 .btn-group { 
     display: inline-block; 
 }
+
+h1.logo{
+    color: white;
+}
+
+.logo {
+    font-family: 'Lobster', cursive;
+}
+
+.stylish{
+    background-color: tomato;
+}
+  

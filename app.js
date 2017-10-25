@@ -12,5 +12,5 @@ config(['$routeProvider', function($routeProvider) {
 	  })
     //here is our failsafe -- if a user requests a route we don't have
     //set up, we will just direct them back to home
-  	.otherwise({redirectTo: '/home/all'});
+  	.otherwise({redirectTo: '/home/search'});
 }]);

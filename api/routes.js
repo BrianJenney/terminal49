@@ -47,8 +47,8 @@ router.get('/getshipdata/:id', function(req, res) {
         response.eta = shipInfo.updates[0].vessel_eta;
         response.containers = shipInfo.containers;
         response.updates = shipInfo.updates;
+        response.link = 'https://terminal48.herokuapp.com/#/home/' + shipInfo.booking_number;
     }
-
     res.json(response);
 });
 

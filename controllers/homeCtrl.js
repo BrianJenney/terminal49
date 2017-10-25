@@ -15,6 +15,7 @@ angular.module('myApp')
 	vm.showUpdates = false;
 	vm.updates = [];
 	vm.savedInfo = [];
+	vm.showHist = false;
 
 	/*
 	Functions
@@ -26,6 +27,7 @@ angular.module('myApp')
 
 	vm.showUpdate = showUpdate;
 	vm.hideUpdate = hideUpdate;
+	vm.toggleHist = toggleHist;
 	vm.saveId = saveId;
 	vm.useId = useId;
 
@@ -36,8 +38,13 @@ angular.module('myApp')
 	(init=()=>{
 		vm.getsavedbookings();
 		const urlstring = $routeParams.id;
-		vm.userSearch = urlstring;
-		getListing();
+		if(urlstring === 'search'){
+			vm.userSearch = '';
+		}else{
+			vm.userSearch = urlstring;
+			getListing();
+		}
+		
 	})();
 
 	
@@ -84,8 +91,9 @@ angular.module('myApp')
 	//return all saved ids
 	function getSavedIds(){
 		$http.get('/getsavedbookings').then((response)=>{
-			console.log(response);
 			vm.savedInfo = response.data;
+		}, (err)=>{
+			toastr.error('Unable to get saved booking ID(s)')
 		});
 	};
 
@@ -110,6 +118,12 @@ angular.module('myApp')
 
 	function hideUpdate(){
 		vm.showUpdates = false;
+	};
+
+	function toggleHist(){
+		
+		vm.showHist = vm.showHist === true ? vm.showHist = false : vm.showHist = true;
+		console.log(vm.showHist);
 	};
 
  }]);

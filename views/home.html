@@ -3,6 +3,10 @@
 <div ng-controller="HomeCtrl as home">
 
 	<div class="container">
+		<div class="jumbotron stylish">
+			<h1 class="text-center logo">Welcome to Terminal 48.99!</h1>
+		</div>
+		
 
 		<div class="row">
 
@@ -13,7 +17,7 @@
 				ng-model="home.userSearch"
 				type="text">
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-3 text-left">
 				<button
 				class="btn btn-primary"
 				ng-disabled="!home.userSearch.length"
@@ -22,6 +26,24 @@
 					Search for Shipment
 				</button>
 			</div>
+			<div class="col-md-3 col-md-offset-3 text-right">
+					<button
+					class="btn btn-warning"
+					ng-click="home.toggleHist()">
+						<span 
+						ng-if="home.showHist" 
+						class="glyphicon glyphicon-folder-open"></span>
+						<span 
+						ng-if="!home.showHist" 
+						class="glyphicon glyphicon-folder-close"></span>
+						<span ng-if="!home.showHist">
+							Show History
+						</span>
+						<span ng-if="home.showHist">
+							Hide History
+						</span>
+					</button>
+				</div>
 		
 
 		</div>
@@ -36,7 +58,7 @@
 
 		<div 
 		class="panel panel-default pad-top"
-		ng-if="home.savedInfo.length">
+		ng-if="home.savedInfo.length && home.showHist">
 			<div class="panel-heading">
 				<div class="panel-title pull-left">
 				Saved Booking IDs
@@ -89,6 +111,7 @@
 							<th>Vessel</th>
 							<th>Voyage</th>
 							<th>Vessel ETA</th>
+							<!-- <th>Link</th> -->
 							<th class="text-center">Save ID</th>
 						</tr>
 					</thead>
@@ -101,6 +124,12 @@
 							<td>{{home.shipInfo.vessel}}</td>
 							<td>{{home.shipInfo.voyage}}</td>
 							<td>{{home.shipInfo.eta}}</td>	
+							<!-- <td>
+								<a 
+								data-toggle="tooltip" title={{home.shipInfo.link}}
+								ng-href={{home.shipInfo.link}}
+								target="_blank">Link</a>
+							</td> -->
 							<td class="text-center">
 								<button 
 								class="btn btn-xs btn-success"
@@ -111,6 +140,7 @@
 						</tr>
 					</tbody>		
 				</table>
+				<p class="text-muted"><b>Link:</b> {{home.shipInfo.link}}</p>
 			</div>
 		</div>
 
