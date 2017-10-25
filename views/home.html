@@ -1,0 +1,188 @@
+
+
+<div ng-controller="HomeCtrl as home">
+
+	<div class="container">
+
+		<div class="row">
+
+			<div class="col-md-3">
+				<input 
+				class="form-control"
+				placeholder="Enter a shipment ID to begin"
+				ng-model="home.userSearch"
+				type="text">
+			</div>
+			<div class="col-md-3">
+				<button
+				class="btn btn-primary"
+				ng-disabled="!home.userSearch.length"
+				ng-click="home.getListing()">
+					<span class="glyphicon glyphicon-search"></span>
+					Search for Shipment
+				</button>
+			</div>
+		
+
+		</div>
+		
+		<div class="row pad-top">
+			<div 
+			class="well col-sm-6 col-sm-offset-3"
+			ng-if="home.error">	
+				<p class="muted text-center">Oops, try again. We have no shipment information associated with the ID you entered.</p>
+			</div>
+		</div>
+
+		<div 
+		class="panel panel-default pad-top"
+		ng-if="home.savedInfo.length">
+			<div class="panel-heading">
+				<div class="panel-title pull-left">
+				Saved Booking IDs
+				</div>
+				<div class="panel-title pull-right">
+					<button 
+					class="btn btn-danger"
+					ng-click="home.removeItem('all')">
+							Remove All
+						<span class="glyphicon glyphicon-remove">	
+						</span>
+					</button>
+				</div>
+				<div class="clearfix"></div>
+				
+			</div>
+			<div class="panel-body">
+				<div 
+				class="col-md-3"
+				ng-repeat="saved in home.savedInfo">
+
+				
+				<span ng-click="home.useId(saved.id)">{{saved.id}}
+					<span class="btn-group">
+						<button 
+						class="btn btn-danger btn-xs"
+						ng-click="home.removeItem(saved.hashKey)">
+							<span class="glyphicon glyphicon-remove"></span>
+						</button>
+					</span>
+				</span>
+				</div>
+			</div>
+		</div>
+
+	
+		<div 
+		class="panel panel-default pad-top"
+		ng-if="home.shipInfo.blnum.length">
+			<div class="panel-heading">Booking Details</div>
+			<div class="panel-body">
+				<table 
+				class="table table-striped">
+					<thead>
+						<tr>
+							<th>B/L Number</th>
+							<th>Steamship Line</th>
+							<th>Origin</th>
+							<th>Destination</th>
+							<th>Vessel</th>
+							<th>Voyage</th>
+							<th>Vessel ETA</th>
+							<th class="text-center">Save ID</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{{home.shipInfo.blnum}}</td>
+							<td>{{home.shipInfo.steamLine}}</td>
+							<td>{{home.shipInfo.origin}}</td>
+							<td>{{home.shipInfo.destination}}</td>
+							<td>{{home.shipInfo.vessel}}</td>
+							<td>{{home.shipInfo.voyage}}</td>
+							<td>{{home.shipInfo.eta}}</td>	
+							<td class="text-center">
+								<button 
+								class="btn btn-xs btn-success"
+								ng-click="home.saveId(home.shipInfo.blnum)">
+									<span class="glyphicon glyphicon-save"></span>
+								</button>
+							</td>	
+						</tr>
+					</tbody>		
+				</table>
+			</div>
+		</div>
+
+		<div 
+		class="panel panel-default"	
+		ng-if="home.shipInfo.containers.length">
+			<div class="panel-heading">Containers</div>
+			<div class="panel-body">
+				<table
+				class="table table-striped">
+					<thead>
+						<tr>
+							<th>Number</th>
+							<th>Size</th>
+							<th>Type</th>
+							<th>Current Location</th>
+							<th>Last Status </th>
+							<th>Last status At</th>
+							<th class="text-center">Updates</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr 
+						ng-repeat="c in home.shipInfo.containers"
+						ng-click="home.getUpdates(c.number)">
+							<td>{{c.number}}</td>
+							<td>{{c.size}}</td>
+							<td>{{c.type}}</td>
+							<td>{{c.location}}</td>
+							<td>{{c.last_status}}</td>
+							<td>{{c.last_status_at}}</td>
+							<td class="text-center">
+								<button class="btn btn-xs btn-warning">
+									<span class="glyphicon glyphicon-road"></span>
+								</button>
+							</td>
+						</tr>
+					</tbody>		
+				</table>
+			</div>
+		</div>
+
+		<p 
+		class="text-muted"
+		ng-if="home.showUpdates && !home.updates.length">There are no updates for this particular shipment.</p>
+		<div 
+		class="panel panel-default"
+		ng-if="home.showUpdates && home.updates.length">
+				<div class="panel-heading">Updates</div>
+				<div class="panel-body">
+					<table
+					class="table table-striped">
+						<thead>
+							<tr>
+								<th>Delivery</th>
+								<th>Destination</th>
+								<th>Origin</th>
+								<th>ETA</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="update in home.updates">
+								<td>{{update.delivery_on}}</td>
+								<td>{{update.destination}}</td>
+								<td>{{update.origin}}</td>
+								<td>{{update.vessel_eta}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+	</div>
+</div>
+
+

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="style/style.css">
+	<script src="https://cdn.jsdelivr.net/npm/angular-toastr@2/dist/angular-toastr.tpls.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/angular-toastr@2/dist/angular-toastr.css">
+</head>
+<body>
+<div class="container-fluid">
+	<!-- Here are our links with hashbangs to request
+	our ng-routes that have been set up.
+	Those hashbangs are necessary for ng-route to work
+ -->
+<!-- <nav>
+	<ul>
+		<li><a href="/#/home">Home</a></li>
+		<li><a href="/#/pageOne">Page One</a></li>
+		<li><a href="/#/pageTwo">Page Two</a></li>
+	</ul>
+</nav> -->
+</div>
+
+<!-- ng view is where we will INJECT our templates when a certain route is requested -->
+
+<div ng-view></div>
+
+
+
+<!-- NG route library -->
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+
+<script src="app.js"></script>
+
+<script src="controllers/homeCtrl.js"></script>
+
+</body>
+</html>
