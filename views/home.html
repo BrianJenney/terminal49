@@ -188,7 +188,7 @@
 		ng-if="home.showUpdates && !home.updates.length">There are no updates for this particular shipment.</p>
 		<div 
 		class="panel panel-default"
-		ng-if="home.showUpdates && home.updates.length">
+		ng-if="home.showUpdates && home.updates.length && !home.error">
 				<div class="panel-heading">Updates</div>
 				<div class="panel-body">
 					<table
